@@ -1,0 +1,40 @@
+﻿<Window x:Class="AddDataApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        Height="350"
+        Width="250"
+        Title="App by Sascha Böck"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+    
+    <Grid>
+        <StackPanel>
+            <TabPanel HorizontalAlignment="Center" Margin="10">
+                <Label Content="Target" Width="50"/>
+                <ComboBox Width="150" ItemsSource="{Binding Targets, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Target}"/>
+            </TabPanel>
+            <TabPanel HorizontalAlignment="Center" Margin="10">
+                <Label Content="Name" Width="50"/>
+                <TextBox Width="150" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+            </TabPanel>
+            <TabPanel HorizontalAlignment="Center" Margin="10">
+                <Label Content="Type" Width="50"/>
+                <ComboBox Width="150" ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Type}"/>
+            </TabPanel>
+            <TabPanel HorizontalAlignment="Center" Margin="10">
+                <Label Content="Salary" Width="50"/>
+                <TextBox Width="150" Text="{Binding Salary, UpdateSourceTrigger=PropertyChanged}"/>
+            </TabPanel>
+            <TabPanel HorizontalAlignment="Center" Margin="10">
+                <Label Content="Key?" Width="50"/>
+                <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" IsChecked="{Binding Ownskey}"/>
+            </TabPanel>
+            <TabPanel HorizontalAlignment="Center" Margin="10">
+                <Button Width="150" Height="30" Content="Send" Command="{Binding SendBtnClick}"/>
+            </TabPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -9,15 +9,27 @@
         Width="525"
         Title="App by Sascha Böck"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-    
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+
+        <TabPanel Margin="10,10,0,0">
+            <Label Content="Source: "/>
+            <ComboBox Width="150" ItemsSource="{Binding Sources}" SelectedItem="{Binding Source}"/>
+        </TabPanel>
+
+        <DataGrid Grid.Row="1" Margin="20" AutoGenerateColumns="False" ItemsSource="{Binding Data}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Type}" ClipboardContentBinding="{x:Null}" Header="Type"/>
+                <DataGridTextColumn Binding="{Binding Salary}" ClipboardContentBinding="{x:Null}" Header="Salary"/>
+                <DataGridTextColumn Binding="{Binding Ownskey}" ClipboardContentBinding="{x:Null}" Header="owns a key"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 </Window>

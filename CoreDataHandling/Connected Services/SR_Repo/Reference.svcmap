@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="76c87067-9749-4b86-ac60-143a224759e7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8735/ServiceRepo/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d0c55c78-89f9-404a-a940-6d6ac509b5ac" SourceId="1" SourceUrl="net.tcp://localhost:8735/ServiceRepo/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="5d163064-7db6-4a57-91de-a4c09dac34aa" SourceId="1" SourceUrl="net.tcp://localhost:8735/ServiceRepo/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="5d8dc430-da10-483a-b314-9ef5d8454c7d" SourceId="1" SourceUrl="net.tcp://localhost:8735/ServiceRepo/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="380629ef-75fd-4d2c-adf8-bbe06b63f1c6" SourceId="1" SourceUrl="net.tcp://localhost:8735/ServiceRepo/mex" />
+    <MetadataFile FileName="Shared.xsd" MetadataType="Schema" ID="681e5fc7-fe22-4a63-a248-48b02dc418f3" SourceId="1" SourceUrl="net.tcp://localhost:8735/ServiceRepo/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

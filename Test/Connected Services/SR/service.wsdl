@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceRepo" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="tcp_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Shared" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceRepo_QueryAvailableResources_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAvailableResources" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRepo_QueryAvailableResources_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAvailableResourcesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRepo_QueryAvailableTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAvailableTypes" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRepo_QueryAvailableTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAvailableTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRepo_QueryAllDataFromRepo_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAllDataFromRepo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRepo_QueryAllDataFromRepo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAllDataFromRepoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRepo_AddDataToRepo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDataToRepo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRepo_AddDataToRepo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDataToRepoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceRepo">
+    <wsdl:operation name="QueryAvailableResources">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRepo/QueryAvailableResources" message="tns:IServiceRepo_QueryAvailableResources_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRepo/QueryAvailableResourcesResponse" message="tns:IServiceRepo_QueryAvailableResources_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAvailableTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRepo/QueryAvailableTypes" message="tns:IServiceRepo_QueryAvailableTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRepo/QueryAvailableTypesResponse" message="tns:IServiceRepo_QueryAvailableTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAllDataFromRepo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRepo/QueryAllDataFromRepo" message="tns:IServiceRepo_QueryAllDataFromRepo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRepo/QueryAllDataFromRepoResponse" message="tns:IServiceRepo_QueryAllDataFromRepo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDataToRepo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRepo/AddDataToRepo" message="tns:IServiceRepo_AddDataToRepo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRepo/AddDataToRepoResponse" message="tns:IServiceRepo_AddDataToRepo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="tcp" type="tns:IServiceRepo">
+    <wsp:PolicyReference URI="#tcp_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="QueryAvailableResources">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRepo/QueryAvailableResources" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAvailableTypes">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRepo/QueryAvailableTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAllDataFromRepo">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRepo/QueryAllDataFromRepo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDataToRepo">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRepo/AddDataToRepo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceRepo">
+    <wsdl:port name="tcp" binding="tns:tcp">
+      <soap12:address location="net.tcp://localhost:8735/ServiceRepo/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8735/ServiceRepo/</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

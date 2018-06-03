@@ -1,33 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GalaSoft.MvvmLight;
+using Shared;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-//using System.Messaging; //add reference to Messaging
-using System.Runtime.Serialization; //add reference to Serialization
-using System.ServiceModel;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
-using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using static System.Net.Mime.MediaTypeNames;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
-using QueryDataApp.Model;
 
 namespace QueryDataApp.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        //private Service_Client client = new Service_Client("tcp");
+        private SR_Core.ServiceCoreClient client = new SR_Core.ServiceCoreClient();
+        private ObservableCollection<XData> data;
+        private string source="";
+        private string[] sources;
+
+        #region Properties
+        public string[] Sources
+        {
+            get => sources; set
+            {
+                sources = value; RaisePropertyChanged();
+            }
+        }
+
+        public string Source
+        {
+            get { return source; }
+            set { source = value; RaisePropertyChanged(); }
+        }
+
+
+        public ObservableCollection<XData> Data
+        {
+            get { return data; }
+            set { data = value; RaisePropertyChanged(); }
+        }
+
+        #endregion
 
         public MainViewModel()
         {
@@ -38,23 +46,24 @@ namespace QueryDataApp.ViewModel
             else
             {
                 // Code runs "for real"
-                //Task.Factory.StartNew(Refresh); //when GUI refreshes in own thread.
+                Sources = client.GetAvailableRepos();
+                Data = new ObservableCollection<XData>(client.GetDataFromRepo(Source));
+                Task.Factory.StartNew(Refresh); //when GUI refreshes in own thread.
             }
+        }
 
-            /*
-            private void Refresh()
+        private void Refresh()
+        {
+            while (true)
             {
-                while (true)
+                App.Current.Dispatcher.Invoke(() =>
                 {
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        //DoWork
-                        //RaisePropertyChanged("PropThatHasChanged");
-                    });
-                    //Thread.Sleep(4000);
-                }
+                    Data = null;
+                    Data = new ObservableCollection<XData>(client.GetDataFromRepo(Source));
+                    RaisePropertyChanged("Data");
+                });
+                Thread.Sleep(5000);
             }
-            */
         }
     }
 }
